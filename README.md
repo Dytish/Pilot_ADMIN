@@ -30,7 +30,16 @@ python manage.py createsuperuser
 ????создание пользователя для взаимедействия с админкой и ограниченными правами 
 python manage.py create_initial_user
 
+python manage.py populate_tables
+
 
 <!-- перевод 
 python manage.py makemessages -l ruo
 python manage.py compilemessages -->
+
+
+docker compose exec django python manage.py makemigrations
+docker compose exec django python manage.py migrate
+docker compose exec django python manage.py populate_tables
+
+docker compose exec django logs

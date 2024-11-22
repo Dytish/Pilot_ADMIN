@@ -1,6 +1,32 @@
-version: "3.5"
+version: "3.8"
 
 services:
+
+  django:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        HOST: ${HOST}
+        DJANGO_PORT: ${DJANGO_PORT}
+    container_name: django_container
+    environment:
+      - ALLOWED_HOSTS=${HOST},0.0.0.0
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - ./django:/django
+      - static:/django/static
+      - media:/django/media
+    ports:
+      - "${DJANGO_PORT}:8000"
+    depends_on:
+      - postgres
+    networks:
+      - app_network
 
   postgres:
     build:
@@ -17,8 +43,31 @@ services:
     volumes:
       - ./data:/var/lib/postgresql/data
     networks:
-      - postgres_network
+      - app_network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: DockerfileNginx
+    container_name: nginx_container
+    environment:
+      - HOST=${HOST}
+    ports:
+      - "${NGINX_PORT}:80"
+    depends_on:
+      - django
+    volumes:
+      - ./nginx/conf:/etc/nginx/templates
+      - static:/django/static
+      - media:/django/media
+    networks:
+      - app_network
+
 
 networks:
-  postgres_network:
-    name: postgres_network 
+  app_network:
+    driver: bridge
+
+volumes:
+  static:
+  media:

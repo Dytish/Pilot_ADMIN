@@ -19,7 +19,7 @@ BD_USER=config('POSTGRES_USER')
 BD_PASSWORD=config('POSTGRES_PASSWORD')
 BD_DB=config('POSTGRES_DB')
 BD_PORT=config('POSTGRES_PORT', default='5432')
-BD_HOST=config('POSTGRES_HOST', default='localhost')
+BD_HOST=config('HOST', default='localhost')
 
 HOST=config('HOST', default='localhost')
 
