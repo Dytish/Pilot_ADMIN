@@ -12,6 +12,8 @@ services:
         HOST: ${HOST}
         DJANGO_PORT: ${DJANGO_PORT}
     container_name: django_container
+    env_file:
+      - .env
     environment:
       - ALLOWED_HOSTS=${HOST},0.0.0.0
       - POSTGRES_USER=${POSTGRES_USER}
@@ -34,6 +36,8 @@ services:
       dockerfile: DockerPostgresql
     privileged: true
     container_name: postgres_container
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -50,6 +54,8 @@ services:
       context: ./nginx
       dockerfile: DockerfileNginx
     container_name: nginx_container
+    env_file:
+      - .env
     environment:
       - HOST=${HOST}
     ports:
@@ -66,7 +72,9 @@ services:
 
 networks:
   app_network:
-    driver: bridge
+    driver: overlay     
+    driver_opts:       
+      com.docker.network.driver.mtu: 1450
 
 volumes:
   static:
