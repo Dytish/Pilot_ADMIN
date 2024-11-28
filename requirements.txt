@@ -3,3 +3,5 @@ djangorestframework
 django-rest-knox
 python-decouple
 psycopg2-binary
+django-import-export
+django-import-export[xlsx]

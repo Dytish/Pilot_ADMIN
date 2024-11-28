@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = "Заполнение таблиц District, Region и City данными"
 
     def handle(self, *args, **kwargs):
-        with open('cbs/data/data_sql.json', 'r', encoding='utf-8') as file:
+        with open('cbs/data_sql/districts_regions_cities.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
 
         for district_name in data['districts']:

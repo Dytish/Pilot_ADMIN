@@ -1,7 +1,8 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(ImportExportModelAdmin):
     list_display = (
         'id', 'user_tg_id', 'username', 'first_name', 
         'last_name', 'language_code', 'is_bot', 

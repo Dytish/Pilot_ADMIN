@@ -37,7 +37,7 @@ class RecordViewSet(viewsets.ModelViewSet):
             user_tg_id = int(user_tg_id)
             records = Record.objects.filter(user_tg_id=user_tg_id)
             if not records.exists():
-                return Response(serializer.data, status=200)
+                # return Response(serializer.data, status=200)
                 return Response({"message": "Заявки не найдены."}, status=404)
             serializer = self.get_serializer(records, many=True)
             return Response(serializer.data, status=200)

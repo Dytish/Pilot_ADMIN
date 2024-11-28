@@ -73,3 +73,13 @@ python manage.py create_initial_user
 ```
 
 
+# заполнение городов
+```bash
+python manage.py populate_tables
+```
+
+
+
+```bash
+docker exec -it django_container python manage.py migrate
+```

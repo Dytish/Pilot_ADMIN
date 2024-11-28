@@ -72,9 +72,7 @@ services:
 
 networks:
   app_network:
-    driver: overlay     
-    driver_opts:       
-      com.docker.network.driver.mtu: 1450
+    name: app_network 
 
 volumes:
   static:

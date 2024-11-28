@@ -38,12 +38,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = [HOST, '0.0.0.0']
 
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{HOST}',
+    # другие доверенные источники, если нужно
+]
 
 # Application definition
 
 INSTALLED_APPS = [
     'cbs.apps.CbsConfig',
     'rest_framework',
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

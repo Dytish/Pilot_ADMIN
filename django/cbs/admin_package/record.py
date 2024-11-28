@@ -1,7 +1,7 @@
 from django.contrib import admin
+from import_export.admin import ImportExportModelAdmin
 
-
-class RecordAdmin(admin.ModelAdmin):
+class RecordAdmin(ImportExportModelAdmin):
     list_display = (
         'user_tg_id', 'name', 'age', 'location', 'is_military', 
         'educational_goal', 'telephone', 'is_end', 
